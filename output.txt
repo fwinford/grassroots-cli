@@ -1,0 +1,32 @@
+
+Fetching and analyzing article...
+
+Summary:
+Immigrants without legal status are being detained in Southern California and processed at the Immigration and Customs Enforcement center in Los Angeles.
+Families and lawyers gather daily at the center seeking information about their loved ones.
+Reports of poor conditions inside the center include lack of water and food, and detainees sleeping on the ground.
+
+Cause: Increased immigration raids and detentions
+Location: Los Angeles, CA
+
+Found P84: Ethnic, Immigrant Centers, Services, Q71: International Migration, Refugee Issues relevant NTEE codes for classification
+City: Los Angeles
+State: CA
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'searchTerm': 'Ethnic', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&searchTerm=Ethnic&city=Los+Angeles&state=CA
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'searchTerm': 'International Migration', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&searchTerm=International+Migration&city=Los+Angeles&state=CA
+
+How you can help:
+
+Based on the cause and location you're interested in, I would recommend supporting the following organizations:
+
+Grassroots Organization: **LA Immigration Solidarity**. This organization provides legal aid and housing support for recent immigrant families in Los Angeles. By supporting this group, you're directly helping those detained and their families navigate the legal system and find a safe place to live.
+
+Nonprofit Organization: Unfortunately, the missions of the MULTI ETHNIC STAR ORCHESTRA and MULTI ETHNIC PRAYER MOVEMENT are not listed, so it's hard to determine their relevance to the cause. 
+
+However, there's a national organization, the **American Civil Liberties Union (ACLU)**, that is deeply involved in immigrant rights. They have been at the forefront of challenging increased immigration raids and detentions, and they have a strong presence in Southern California. 
+
+Remember, every contribution makes a difference. Your support can help these organizations continue their important work and make a positive impact on the lives of immigrants and their families. It's a powerful way to stand up for what you believe in and make a tangible difference.

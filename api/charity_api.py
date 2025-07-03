@@ -10,7 +10,7 @@ def get_top_rated_charities(category=None, city=None, state=None, rows=25):
         "rows": rows,
     }
     if category:
-        params["category"] = ",".join(category)
+        params["searchTerm"] = category
     if city:
         params["city"] = city
     if state:

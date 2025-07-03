@@ -2,9 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from openai import OpenAI
-
 load_dotenv()
-
 
 
 def extract_article_data(article_text):
@@ -48,7 +46,8 @@ def extract_article_data(article_text):
 
     Summary: Summary: [Write a clear, concise and compassionate 3-sentence summary. Highlight who is affected, what is happening, and why it matters.]
     Cause: [Main cause or issue being addressed]
-    NTEE Codes: [Comma-separated list of relevant codes from the list below]
+    NTEE Codes: [Comma-separated list of relevant codes from the list below, (formatting example: "P84: Ethnic, Immigrant Centers, Services",
+    "Q71: International Migration, Refugee Issues")]
     Location: [City, State (2 letter abbreviation), or Country mentioned]
 
     Available NTEE Codes:
@@ -72,26 +71,58 @@ def extract_field(label, lines):
     raise ValueError(f"Missing '{label}:' in GPT output.")
 
 
-def explain_orgs(grassroots, charities, cause, location):
+def explain_orgs(grassroots, charities, cause, location, summary):
+    from openai import OpenAI
+    import os
+
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    grassroots_list = "\n".join(f"{name}: {desc}" for name, _, desc in grassroots)
-    charities_list = "\n".join(
-        f"{org['charityName']}: {org.get('mission', 'No mission listed')}"
-        for org in charities[:5]
-    )
 
+    # Format grassroots section
+    if grassroots:
+        grassroots_section = "\n".join(f"- {name}: {desc}" for name, _, desc in grassroots)
+    else:
+        grassroots_section = "None found."
+
+    # Format nonprofit section (from OrgHunter)
+    if charities:
+        charity_section = "\n".join(
+            f"- {org['charityName']}: {org.get('missionStatement', 'No mission listed') or 'No mission listed'}"
+            for org in charities[:5]
+        )
+    else:
+        charity_section = "None found."
+
+
+    # Prompt
     prompt = f"""
-        I found these grassroots organizations in {location} working on {cause}:
-        {grassroots_list or 'None found'}
+    A user read a news article about: {summary}. 
+    
+    It has an overall cause of: **{cause}**, which takes place in **{location}**.
 
-        And these top-rated nonprofits from OrgHunter:
-        {charities_list or 'None found'}
+    They are interested in taking action and want to know which organizations — either grassroots or nonprofit — they can support to make a difference.
 
-        Based on their mission, reputability, and local impact, which ones should someone donate to and why?
-        """
+    Here are the organizations we found:
+
+    Grassroots Organizations:
+    {grassroots_section}
+
+    Nonprofit Organizations:
+    {charity_section}
+
+    Please:
+    - Recommend one or two of the most relevant organizations based on their mission and how they align with the cause and location.
+    - Explain why each is relevant in plain language.
+    - If no grassroots or no nonprofits are found, say that explicitly.
+    - Try to aim for at least one of each.
+    - Keep the tone encouraging and action-oriented.
+    - If no grassroots or nonprofits are found, suggest a national organization that might address {cause} instead — but only if it's genuinely appropriate.
+    - Avoid telling the user to “look it up themselves.” Focus on making action feel easy, guided, and empowering.
+    """
+
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.4
+        temperature=0.5
     )
+
     return response.choices[0].message.content
