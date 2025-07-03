@@ -59,7 +59,7 @@ def extract_article_data(article_text):
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.4  # Lower temperature for more consistent formatting
+        temperature=0.4 # Lower temperature for more consistent formatting
     )
     return response.choices[0].message.content
 
@@ -111,18 +111,18 @@ def explain_orgs(grassroots, charities, cause, location, summary):
 
     Please:
     - Recommend one or two of the most relevant organizations based on their mission and how they align with the cause and location.
-    - Explain why each is relevant in plain language.
-    - If no grassroots or no nonprofits are found, say that explicitly.
+    - If found, explain why each is relevant in plain language.
     - Try to aim for at least one of each.
     - Keep the tone encouraging and action-oriented.
-    - If no grassroots or nonprofits are found, suggest a national organization that might address {cause} instead — but only if it's genuinely appropriate.
-    - Avoid telling the user to “look it up themselves.” Focus on making action feel easy, guided, and empowering.
+    - If no grassroots or nonprofits are found, suggest a national organization or grassroots that might address {cause} instead — but only if it's genuinely appropriate.
+    - Avoid telling the user to “look it up themselves.” Focus on making action feel easy, guided, and empowering but also concise.
+    - If you can't find the information, don't tell the user. just present them with that you can find.
     """
 
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.5
+        temperature=0.3
     )
 
     return response.choices[0].message.content

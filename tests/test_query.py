@@ -1,51 +1,60 @@
-import os
-import sqlite3
-import sys
-import unittest
+import pytest
+from unittest.mock import patch
 
-# Ensure project root is in the module search path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from tests.utils import (
+    extract_tags_from_ntee,
+    parse_location,
+    filter_fields,
+    get_filtered_charities
+)
 
-from data.seed_db import seed_database, DB_PATH
+MOCK_NTEE_CODES = [
+    "P84: Ethnic, Immigrant Centers, Services",
+    "Q71: International Migration, Refugee Issues"
+]
 
-
-class TestSeedDatabase(unittest.TestCase):
-    """
-    Unit tests for the seed_database function in db/seed_db.py
-    """
-
-    @classmethod
-    def setUpClass(cls):
-        # Remove existing database to test fresh seeding
-        if os.path.exists(DB_PATH):
-            os.remove(DB_PATH)
-        seed_database()
-
-    def test_db_file_created(self):
-        """
-        Test that the SQLite database file is created.
-        """
-        self.assertTrue(
-            os.path.exists(DB_PATH),
-            "Database file was not created."
-        )
-
-    def test_ntee_code_assigned(self):
-        """
-        Test that at least one org has a non-empty ntee_code field.
-        """
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute(
-            "SELECT COUNT(*) FROM organizations WHERE ntee_code IS NOT NULL AND ntee_code != ''"
-        )
-        count = cursor.fetchone()[0]
-        conn.close()
-        self.assertGreater(
-            count, 0,
-            "No ntee_code values were assigned in the database."
-        )
+MOCK_CHARITY = {
+    "charityName": "Test Charity",
+    "ein": "123456789",
+    "category": "Human Services",
+    "url": "http://example.com/org/123456789",
+    "website": "http://test.org",
+    "missionStatement": "Helping immigrants and refugees.",
+    "acceptingDonations": 1,
+    "score": 5
+}
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_extract_tags_from_ntee():
+    tags = extract_tags_from_ntee(MOCK_NTEE_CODES)
+    assert tags == [
+        "Ethnic", "Immigrant Centers", "Services",
+        "International Migration", "Refugee Issues"
+    ]
+
+
+def test_parse_location():
+    city, state = parse_location("Los Angeles, CA")
+    assert city == "Los Angeles"
+    assert state == "CA"
+
+    city, state = parse_location("New York")
+    assert city == "New York"
+    assert state == ""
+
+
+def test_filter_fields():
+    fields = [
+        "charityName", "ein", "category", "url",
+        "website", "missionStatement", "acceptingDonations", "score"
+    ]
+    filtered = filter_fields([MOCK_CHARITY], fields)
+    assert filtered == [{key: MOCK_CHARITY[key] for key in fields}]
+
+
+@patch("cli.utils.get_top_rated_charities")
+def test_get_filtered_charities(mock_api_call):
+    mock_api_call.return_value = [MOCK_CHARITY]
+    results = get_filtered_charities(["Immigrant Centers"], "Los Angeles", "CA")
+    assert len(results) == 1
+    assert results[0]["charityName"] == "Test Charity"

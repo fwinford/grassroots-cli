@@ -2,16 +2,12 @@
 Fetching and analyzing article...
 
 Summary:
-Immigrants without legal status are being detained in Southern California and processed at the Immigration and Customs Enforcement center in Los Angeles.
-Families and lawyers gather daily at the center seeking information about their loved ones.
-Reports of poor conditions inside the center include lack of water and food, and detainees sleeping on the ground.
+In Los Angeles, families of immigrants without legal status are gathering at a federal immigration building to find their loved ones after they have been arrested by federal immigration agents.
+Reports of horrific conditions inside the building, including inmates drinking from toilets due to thirst, have been relayed.
+The detainees are from a variety of countries, and their families learned about the arrests from videos circulating on social media.
 
-Cause: Increased immigration raids and detentions
+Cause: Aggressive immigration raids and detentions in Los Angeles.
 Location: Los Angeles, CA
-
-Found P84: Ethnic, Immigrant Centers, Services, Q71: International Migration, Refugee Issues relevant NTEE codes for classification
-City: Los Angeles
-State: CA
 → POST http://data.orghunter.com/v1/charitysearch
 → params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'searchTerm': 'Ethnic', 'city': 'Los Angeles', 'state': 'CA'}
 → status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&searchTerm=Ethnic&city=Los+Angeles&state=CA
@@ -21,12 +17,17 @@ State: CA
 
 How you can help:
 
-Based on the cause and location you're interested in, I would recommend supporting the following organizations:
+I'm sorry, but the information about the missions of the listed grassroots and nonprofit organizations is currently not available.
+However, there are other local and national organizations that are working hard to address the issue of aggressive immigration raids and detentions in Los Angeles.
 
-Grassroots Organization: **LA Immigration Solidarity**. This organization provides legal aid and housing support for recent immigrant families in Los Angeles. By supporting this group, you're directly helping those detained and their families navigate the legal system and find a safe place to live.
+One such organization is the Coalition for Humane Immigrant Rights (CHIRLA).
+CHIRLA is a California leader with national impact made of diverse immigrant families and individuals who act as agents of social change to achieve a world with freedom of mobility, full human rights, and true participatory democracy.
+They are based in Los Angeles and have been actively working to protect the rights of immigrants, including those who have been detained.
 
-Nonprofit Organization: Unfortunately, the missions of the MULTI ETHNIC STAR ORCHESTRA and MULTI ETHNIC PRAYER MOVEMENT are not listed, so it's hard to determine their relevance to the cause. 
+Another organization you might consider supporting is the American Civil Liberties Union (ACLU) of Southern California.
+The ACLU works in courts, legislatures, and communities to defend and preserve the individual rights and liberties that the Constitution and laws of the United States guarantee everyone in this country.
+They have been very active in advocating for the rights of immigrants and have been involved in legal actions against inhumane detention conditions.
 
-However, there's a national organization, the **American Civil Liberties Union (ACLU)**, that is deeply involved in immigrant rights. They have been at the forefront of challenging increased immigration raids and detentions, and they have a strong presence in Southern California. 
-
-Remember, every contribution makes a difference. Your support can help these organizations continue their important work and make a positive impact on the lives of immigrants and their families. It's a powerful way to stand up for what you believe in and make a tangible difference.
+Both of these organizations align with the cause of addressing aggressive immigration raids and detentions and are based in the Los Angeles area.
+Your support can help them continue their important work.
+Remember, every bit of help counts and your involvement can make a real difference.
