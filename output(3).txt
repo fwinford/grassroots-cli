@@ -1,0 +1,11 @@
+
+Fetching and analyzing article...
+
+Summary:
+The article describes the experiences of families and lawyers trying to locate and assist immigrants detained by U.S. Immigration and Customs Enforcement (ICE) in Los Angeles. It highlights the difficulties faced by those trying to find their loved ones, including long waits, lack of information, and reports of poor conditions inside the detention facilities. The article also mentions recent protests against aggressive immigration raids in the city.
+
+Cause: Aggressive immigration raids and detentions by ICE in Los Angeles
+Location: Los Angeles, California
+
+Found ['P84: Ethnic', 'Immigrant Centers', 'Services', 'Q71: International Migration', 'Refugee Issues'] relevant NTEE codes for classification
+we made it

@@ -1,0 +1,13 @@
+
+Fetching and analyzing article...
+
+Summary:
+Immigrants without legal status who are detained in Southern California are processed in a federal immigration building in downtown Los Angeles.
+Families of the detainees, some with lawyers, come to find their loved ones after they've been arrested by federal immigration agents.
+The conditions inside the detention facilities are reportedly horrific, with inmates so thirsty they have been drinking from the toilets.
+
+Cause: Aggressive immigration raids in Los Angeles
+Location: Los Angeles, California
+
+Found ['P84: Ethnic', 'Immigrant Centers', 'Services', 'Q71: International Migration', 'Refugee Issues'] relevant NTEE codes for classification
+we made it

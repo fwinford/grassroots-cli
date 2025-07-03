@@ -9,23 +9,58 @@ ORG_HUNTER_API_KEY = os.environ.get("ORG_HUNTER_API_KEY")
 
 
 def extract_article_data(article_text):
-    prompt = f"""
-    You will be given a news article. Extract exactly three fields from it in the format below.
+    ntee_codes = {
+        "L41": "Homeless, Temporary Shelter For",
+        "L20": "Housing Development, Construction, Management",
+        "P84": "Ethnic, Immigrant Centers, Services",
+        "Q71": "International Migration, Refugee Issues",
+        "M20": "Disaster Preparedness and Relief Services",
+        "Q30": "International Development, Relief Services",
+        "R40": "Voter Education, Registration",
+        "W24": "Citizen Participation",
+        "R22": "Minority Rights",
+        "R24": "Women's Rights",
+        "R26": "Lesbian, Gay Rights",
+        "R61": "Reproductive Rights",
+        "R62": "Right to Life",
+        "Q70": "International Human Rights",
+        "C30": "Natural Resources Conservation & Protection",
+        "C35": "Energy Resources Conservation & Development",
+        "D20": "Animal Protection & Welfare",
+        "S20": "Community, Neighborhood Development, Improvement",
+        "S30": "Economic Development",
+        "J20": "Employment Procurement Assistance, Job Training",
+        "B90": "Educational Services and Schools – Other",
+        "O50": "Youth Development Programs, Other",
+        "E70": "Public Health Program",
+        "F20": "Alcohol, Drug Abuse Prevention & Treatment",
+        "F30": "Mental Health Treatment (Multipurpose)",
+        "K31": "Food Banks, Food Pantries",
+        "P43": "Family Violence Shelters, Services",
+        "I72": "Child Abuse, Prevention of",
+        "I80": "Legal Services",
+        "I44": "Prison Alternatives"
+    }
+    
+    codes_list = "\n".join([f"{code}: {desc}" for code, desc in ntee_codes.items()])
+    
+    prompt = f"""Extract the following information from the news article and return ONLY the four lines below in exactly this format:
 
-    Respond strictly using this structure:
-    Summary: <A concise 3-sentence summary of the article>
-    Cause: <The main cause or issue being addressed, e.g., housing justice, refugee aid, disaster relief>
-    Location: <The specific city, state, or country involved>
+    Summary: Summary: [Write a clear, concise and compassionate 3-sentence summary. Highlight who is affected, what is happening, and why it matters.]
+    Cause: [Main cause or issue being addressed]
+    NTEE Codes: [Comma-separated list of relevant codes from the list below]
+    Location: [City, State, or Country mentioned]
 
-    Only return these three lines with no extra commentary, explanation, or formatting.
+    Available NTEE Codes:
+    {codes_list}
 
     Article:
-    {article_text}
-    """
+    {article_text}"""
+
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.4
+        temperature=0.4  # Lower temperature for more consistent formatting
     )
     return response.choices[0].message.content
 

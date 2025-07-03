@@ -10,46 +10,7 @@ from dotenv import load_dotenv
 JSON_PATH = os.path.join("data", "grassroots_orgs.json")
 DB_PATH = os.path.join("data", "organizations.db")
 
-# Predefined NTEE codes and descriptions for classification
-NTEE_CODES = {
-    "L41": "Homeless, Temporary Shelter For",
-    "L20": "Housing Development, Construction, Management",
-    "P84": "Ethnic, Immigrant Centers, Services",
-    "Q71": "International Migration, Refugee Issues",
-    "M20": "Disaster Preparedness and Relief Services",
-    "Q30": "International Development, Relief Services",
-    "R40": "Voter Education, Registration",
-    "W24": "Citizen Participation",
-    "R22": "Minority Rights",
-    "R24": "Women’s Rights",
-    "R26": "Lesbian, Gay Rights",
-    "R61": "Reproductive Rights",
-    "R62": "Right to Life",
-    "Q70": "International Human Rights",
-    "C30": "Natural Resources Conservation & Protection",
-    "C35": "Energy Resources Conservation & Development",
-    "D20": "Animal Protection & Welfare",
-    "S20": "Community, Neighborhood Development, Improvement",
-    "S30": "Economic Development",
-    "J20": "Employment Procurement Assistance, Job Training",
-    "B90": "Educational Services and Schools – Other",
-    "O50": "Youth Development Programs, Other",
-    "E70": "Public Health Program",
-    "F20": "Alcohol, Drug Abuse Prevention & Treatment",
-    "F30": "Mental Health Treatment (Multipurpose)",
-    "K31": "Food Banks, Food Pantries",
-    "P43": "Family Violence Shelters, Services",
-    "I72": "Child Abuse, Prevention of",
-    "I80": "Legal Services",
-    "I44": "Prison Alternatives"
-}
-
-# First-pass categories for additional context
-CATEGORY_OPTIONS = [
-    "Housing & Shelter", "Civil Rights", "Immigration", "Civic Engagement",
-    "LGBTQ+", "Environment", "Education", "Public Safety",
-    "Community Improvement", "Other"
-]
+4
 
 
 def parse_location(location: str) -> tuple:
