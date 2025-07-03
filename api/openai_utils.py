@@ -4,11 +4,11 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-ORG_HUNTER_API_KEY = os.environ.get("ORG_HUNTER_API_KEY")
+
 
 
 def extract_article_data(article_text):
+    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     ntee_codes = {
         "L41": "Homeless, Temporary Shelter For",
         "L20": "Housing Development, Construction, Management",
@@ -49,7 +49,7 @@ def extract_article_data(article_text):
     Summary: Summary: [Write a clear, concise and compassionate 3-sentence summary. Highlight who is affected, what is happening, and why it matters.]
     Cause: [Main cause or issue being addressed]
     NTEE Codes: [Comma-separated list of relevant codes from the list below]
-    Location: [City, State, or Country mentioned]
+    Location: [City, State (2 letter abbreviation), or Country mentioned]
 
     Available NTEE Codes:
     {codes_list}
@@ -72,35 +72,8 @@ def extract_field(label, lines):
     raise ValueError(f"Missing '{label}:' in GPT output.")
 
 
-def get_top_rated_charities(cause, location, tags=None):
-    url = "https://data.orghunter.com/v1/charitysearchsummary"
-    params = {
-        "user_key": ORG_HUNTER_API_KEY,
-        "eligible": 1,
-        "category": cause,
-        "page": 1,
-        "per_page": 25
-    }
-
-    if location:
-        if len(location) == 2 and location.isupper():
-            params["state"] = location
-        else:
-            params["city"] = location
-
-    if tags:
-        params["tags"] = ",".join(tags)
-
-    response = requests.get(url, params=params)
-    if response.status_code == 200:
-        data = response.json()
-        return data.get("charities", [])
-    else:
-        print("OrgHunter API error:", response.status_code, response.text)
-        return []
-
-
 def explain_orgs(grassroots, charities, cause, location):
+    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     grassroots_list = "\n".join(f"{name}: {desc}" for name, _, desc in grassroots)
     charities_list = "\n".join(
         f"{org['charityName']}: {org.get('mission', 'No mission listed')}"
@@ -108,14 +81,14 @@ def explain_orgs(grassroots, charities, cause, location):
     )
 
     prompt = f"""
-    I found these grassroots organizations in {location} working on {cause}:
-    {grassroots_list or 'None found'}
+        I found these grassroots organizations in {location} working on {cause}:
+        {grassroots_list or 'None found'}
 
-    And these top-rated nonprofits from OrgHunter:
-    {charities_list or 'None found'}
+        And these top-rated nonprofits from OrgHunter:
+        {charities_list or 'None found'}
 
-    Based on their mission, reputability, and local impact, which ones should someone donate to and why?
-    """
+        Based on their mission, reputability, and local impact, which ones should someone donate to and why?
+        """
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],

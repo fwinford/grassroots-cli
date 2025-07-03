@@ -1,0 +1,148 @@
+
+Fetching and analyzing article...
+
+Summary:
+Immigrants without legal status who are detained in Southern California are processed in a federal immigration building in downtown Los Angeles.
+Families of the detainees, some with lawyers, come to find their loved ones after they've been arrested by federal immigration agents.
+The conditions inside the detention facilities are reportedly horrific, with inmates so thirsty they have been drinking from the toilets.
+
+Cause: Aggressive immigration raids in Los Angeles
+Location: Los Angeles, CA, USA
+
+Found ['P84: Ethnic, Immigrant Centers, Services', 'Q71: International Migration, Refugee Issues'] relevant NTEE codes for classification
+we made it
+
+City: Los Angeles
+State: CA
+Using tags for search: ['Ethnic', 'Immigrant Centers', 'Services', 'International Migration', 'Refugee Issues']
+
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'category': 'E,t,h,n,i,c', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&category=E%2Ct%2Ch%2Cn%2Ci%2Cc&city=Los+Angeles&state=CA
+
+Aggregated 25 unique organizations matching tags ['Ethnic', 'Immigrant Centers', 'Services', 'International Migration', 'Refugee Issues']:
+
+- TRANFORMATIONAL ART THERAPY A NONPROFIT CORPORATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- OSBORNE HEAD AND NECK FOUNDATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- HEALING ARTS REACHING KIDS (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- MEDICINE IN ACTION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- A THOUSAND JOYS INC (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'category': 'I,m,m,i,g,r,a,n,t, ,C,e,n,t,e,r,s', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&category=I%2Cm%2Cm%2Ci%2Cg%2Cr%2Ca%2Cn%2Ct%2C+%2CC%2Ce%2Cn%2Ct%2Ce%2Cr%2Cs&city=Los+Angeles&state=CA
+
+Aggregated 25 unique organizations matching tags ['Ethnic', 'Immigrant Centers', 'Services', 'International Migration', 'Refugee Issues']:
+
+- TRANFORMATIONAL ART THERAPY A NONPROFIT CORPORATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- OSBORNE HEAD AND NECK FOUNDATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- HEALING ARTS REACHING KIDS (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- MEDICINE IN ACTION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- A THOUSAND JOYS INC (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'category': 'S,e,r,v,i,c,e,s', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&category=S%2Ce%2Cr%2Cv%2Ci%2Cc%2Ce%2Cs&city=Los+Angeles&state=CA
+
+Aggregated 50 unique organizations matching tags ['Ethnic', 'Immigrant Centers', 'Services', 'International Migration', 'Refugee Issues']:
+
+- TRANFORMATIONAL ART THERAPY A NONPROFIT CORPORATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- OSBORNE HEAD AND NECK FOUNDATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- HEALING ARTS REACHING KIDS (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- MEDICINE IN ACTION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- A THOUSAND JOYS INC (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'category': 'I,n,t,e,r,n,a,t,i,o,n,a,l, ,M,i,g,r,a,t,i,o,n', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&category=I%2Cn%2Ct%2Ce%2Cr%2Cn%2Ca%2Ct%2Ci%2Co%2Cn%2Ca%2Cl%2C+%2CM%2Ci%2Cg%2Cr%2Ca%2Ct%2Ci%2Co%2Cn&city=Los+Angeles&state=CA
+
+Aggregated 50 unique organizations matching tags ['Ethnic', 'Immigrant Centers', 'Services', 'International Migration', 'Refugee Issues']:
+
+- TRANFORMATIONAL ART THERAPY A NONPROFIT CORPORATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- OSBORNE HEAD AND NECK FOUNDATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- HEALING ARTS REACHING KIDS (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- MEDICINE IN ACTION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- A THOUSAND JOYS INC (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+→ POST http://data.orghunter.com/v1/charitysearch
+→ params: {'user_key': '4b3d759e4c8228e5665687bed6b86a10', 'eligible': 1, 'rows': 25, 'category': 'R,e,f,u,g,e,e, ,I,s,s,u,e,s', 'city': 'Los Angeles', 'state': 'CA'}
+→ status 200 → URL: https://data.orghunter.com/v1/charitysearch?user_key=4b3d759e4c8228e5665687bed6b86a10&eligible=1&rows=25&category=R%2Ce%2Cf%2Cu%2Cg%2Ce%2Ce%2C+%2CI%2Cs%2Cs%2Cu%2Ce%2Cs&city=Los+Angeles&state=CA
+
+Aggregated 50 unique organizations matching tags ['Ethnic', 'Immigrant Centers', 'Services', 'International Migration', 'Refugee Issues']:
+
+- TRANFORMATIONAL ART THERAPY A NONPROFIT CORPORATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- OSBORNE HEAD AND NECK FOUNDATION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- HEALING ARTS REACHING KIDS (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- MEDICINE IN ACTION (LOS ANGELES, California)
+  Website: 
+  Mission: 
+
+- A THOUSAND JOYS INC (LOS ANGELES, California)
+  Website: 
+  Mission: 
+

@@ -1,18 +1,16 @@
+# cli/main.py
+
 from api.openai_utils import (
     extract_article_data,
     extract_field,
-    get_top_rated_charities,
-    explain_orgs
 )
+from api.charity_api import get_top_rated_charities
 
 from newspaper import Article
 import argparse
-import os
+
 
 def extract_text_from_url(url):
-    """
-    Extracts the full article text from a URL using newspaper3k.
-    """
     article = Article(url)
     article.download()
     article.parse()
@@ -28,50 +26,73 @@ def main():
     print("\nFetching and analyzing article...\n")
 
     if args.mock:
-        ntee_codes_list = ['P84: Ethnic', 'Immigrant Centers', 'Services', 'Q71: International Migration', 'Refugee Issues']
-
+        ntee_codes = [
+    "P84: Ethnic, Immigrant Centers, Services",
+    "Q71: International Migration, Refugee Issues" ]
         analysis = (
-            "Summary: Immigrants without legal status who are detained in Southern California are processed in a federal immigration building in downtown Los Angeles. Families of the detainees, some with lawyers, come to find their loved ones after they've been arrested by federal immigration agents. The conditions inside the detention facilities are reportedly horrific, with inmates so thirsty they have been drinking from the toilets."
+            "Summary: Immigrants without legal status who are detained in Southern California are processed in a federal immigration building in downtown Los Angeles. "
+            "Families of the detainees, some with lawyers, come to find their loved ones after they've been arrested by federal immigration agents. "
+            "The conditions inside the detention facilities are reportedly horrific, with inmates so thirsty they have been drinking from the toilets."
             "\nCause: Aggressive immigration raids in Los Angeles"
-            "\nLocation: Los Angeles, California"
+            "\nLocation: Los Angeles, CA, USA"
         )
     else:
         article_text = extract_text_from_url(args.url)
         analysis = extract_article_data(article_text)
 
     lines = analysis.strip().splitlines()
-    
-    # Extract all fields including NTEE codes
     summary = extract_field("Summary", lines)
     cause = extract_field("Cause", lines)
-    ntee_codes = extract_field("NTEE Codes", lines)
     location = extract_field("Location", lines)
-    
-    # Store NTEE codes for later use
-    ntee_codes_list = [code.strip() for code in ntee_codes.split(",") if code.strip()] if ntee_codes else []
-    
-    # Print only what you want to show
+
+
     print("Summary:\n" + summary.replace(". ", ".\n"))
     print(f"\nCause: {cause}")
     print(f"Location: {location}")
-    
-    # NTEE codes are now stored in ntee_codes_list but not printed
-    print(f"\nFound {ntee_codes_list} relevant NTEE codes for classification")
+    print(f"\nFound {ntee_codes} relevant NTEE codes for classification")
 
-    grassroots = [
-        ("Greenville Mutual Aid", "North Carolina", "A volunteer-run group providing food, blankets, and shelter for flood victims."),
-        ("Eastern NC Housing Recovery Fund", "North Carolina", "Focused on rebuilding homes for low-income families affected by natural disasters."),
-        ("Justice For Housing Now Coalition", "North Carolina", "Advocates for equitable housing policies and emergency shelter access.")
+    print("we made it\n")
+
+    # Correctly parse city and state from location
+    loc_parts = [p.strip() for p in location.split(",")]
+    city_val = loc_parts[0]  
+    state_val = loc_parts[1] if len(loc_parts) > 1 else ""
+
+    print(f"City: {city_val}")
+    print(f"State: {state_val}")
+
+    # Extract descriptive tags from your mock NTEE list
+    # Extract descriptive tags from your mock NTEE list
+    search_tags = [
+    tag.strip()
+    for code_desc in ntee_codes
+    # split off the part after the first “:”
+        for tag in code_desc.split(":", 1)[1].split(",")
+        if tag.strip()
     ]
 
-    print("we made it")
+    print(f"Using tags for search: {search_tags}\n")
 
-    # You can now use ntee_codes_list in your charity search
-    charities = get_top_rated_charities(cause, location, tags=[cause.lower()], ntee_codes=ntee_codes_list)
+    # Query OrgHunter for each descriptive tag
+    all_orgs = []
+    seen = set()
+    for tag in search_tags:
+        results = get_top_rated_charities(
+            category=tag,
+            city=city_val,
+            state=state_val
+        )
+        for org in results:
+            ein = org.get("ein")
+            if ein and ein not in seen:
+                seen.add(ein)
+                all_orgs.append(org)
 
-    print("\nGenerating organization recommendations...\n")
-    explanation = explain_orgs(grassroots, charities, cause, location, ntee_codes=ntee_codes_list)
-    print(explanation)
+    print(f"\nAggregated {len(all_orgs)} unique organizations matching tags {search_tags}:\n")
+    for org in all_orgs[:30]:
+        print(f"- {org['charityName']} ({org['city']}, {org['state']})")
+        print(f"  Website: {org.get('website', 'N/A')}")
+        print(f"  Mission: {org.get('missionStatement', 'No mission listed')}\n")
 
 
 if __name__ == "__main__":
