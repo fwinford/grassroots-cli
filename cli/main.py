@@ -1,10 +1,11 @@
 from openai import OpenAI
 import requests
+from dotenv import load_dotenv
 import os
 
 
-client = "replace me"
-ORG_HUNTER_API_KEY = "replace me"
+client = os.getenv("CLIENT_KEY")
+ORG_HUNTER_API_KEY = os.getenv("ORG_HUNTER_API_KEY")
 
 
 def extract_article_data(article_text):
