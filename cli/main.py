@@ -89,6 +89,9 @@ def main():
     print("\nFetching and analyzing article...\n")
     article_text = extract_text_from_url(args.url)
     analysis = extract_article_data(article_text)
+    print("\n--- Raw Output from OpenAI ---")
+    print(analysis)
+    print("--- End of Raw Output ---\n")
 
     lines = analysis.strip().splitlines()
     summary = extract_field("Summary", lines)

@@ -42,7 +42,7 @@ def extract_article_data(article_text):
     
     codes_list = "\n".join([f"{code}: {desc}" for code, desc in ntee_codes.items()])
     
-    prompt = f"""Extract the following information from the news article and return ONLY the four lines below in exactly this format:
+    prompt = f"""Extract the following information from the news article and return lines below in exactly this format:
 
     Summary: Summary: [Write a clear, concise and compassionate 3-sentence summary. Highlight who is affected, what is happening, and why it matters.]
     Cause: [Main cause or issue being addressed]
